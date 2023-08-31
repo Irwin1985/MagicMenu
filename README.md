@@ -46,3 +46,6 @@ Si deseas contribuir al desarrollo de MagicMenu, visita nuestro repositorio de G
 Si encuentras útil MagicMenu para tu trabajo y deseas apoyar su desarrollo y mantenimiento, considera realizar una donación a través de [PayPal](https://www.paypal.com/donate/?hosted_button_id=LXQYXFP77AD2G) o conviértete en mecenas en [Patreon](https://www.patreon.com/IrwinRodriguez).
 
 ¡Gracias por elegir MagicMenu para elevar tus proyectos en Visual FoxPro!
+
+## Créditos
+[wwDotNetBridge](https://github.com/RickStrahl/wwDotnetBridge)
