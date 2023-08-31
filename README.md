@@ -12,7 +12,7 @@ MagicMenu es una herramienta diseñada para mejorar y extender las capacidades d
 ## Empezando con MagicMenu
 
 1. **Descarga e Instalación:**
-   - Descarga la aplicación [MagicMenu.app]([https://github.com/Irwin1985/MagicMenu.app](https://github.com/Irwin1985/MagicMenu/raw/master/magicmenu.app)).
+   - Descarga la aplicación [MagicMenu.app](https://github.com/Irwin1985/MagicMenu/raw/master/magicmenu.app).
    - Copia en tu directorio de trabajo.
    - Abre el IDE de VFP y ejecuta lo siguiente:
 ```xBase
