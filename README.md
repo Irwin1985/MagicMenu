@@ -2,6 +2,9 @@
 
 MagicMenu es una herramienta diseñada para mejorar y extender las capacidades de Visual FoxPro 9.0. Con MagicMenu, puedes crear proyectos que antes eran difíciles de lograr en VFP, como Proyectos Web con ActiveVFP, Servicios de Windows y Aplicaciones de Consola.
 
+## English translation
+Please refer to [this file](README_EN.md) for english version.
+
 ## Características Clave
 
 - **Crea Proyectos Web con ActiveVFP:** MagicMenu te permite crear sitios web utilizando el framework ActiveVFP, simplificando la instalación y configuración de tus sitios web.
