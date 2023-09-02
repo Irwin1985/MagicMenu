@@ -19,7 +19,7 @@ ENDIF
 
 lcUnique = SYS(2015)
 
-USE f:\desarrollo\magicmenu\lang\languages.dbf AGAIN IN 0 ALIAS Languages
+USE f:\desarrollo\github\magicmenu\lang\languages.dbf AGAIN IN 0 ALIAS Languages
 APPEND BLANK
 REPLACE control_id 	WITH lcUnique
 replace caption_es 	WITH tcCaptionES

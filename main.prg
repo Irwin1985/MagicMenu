@@ -13,7 +13,7 @@ IF NOT PEMSTATUS(_screen, 'oBridge', 5)
 ENDIF
 
 IF PCOUNT() == 0
-	tcLanguage = "ES"
+	tcLanguage = "EN"
 ENDIF
 
 IF NOT INLIST(UPPER(tcLanguage), "ES", "EN")
@@ -21,10 +21,17 @@ IF NOT INLIST(UPPER(tcLanguage), "ES", "EN")
 	RETURN
 ENDIF
 
-public loBarra, gcMainDir, gcVersion
-
+public loBarra, gcMainDir, gcVersion, glDebugMode
 gcMainDir = ADDBS(SYS(5) + SYS(2003))
 gcVersion = "0.0.1"
+
+** DEBUG
+glDebugMode = .t.
+IF glDebugMode
+	CD f:\desarrollo\github\magicmenu\
+ENDIF
+** DEBUG
+
 SET PATH TO "classes;bmps;lang;libs" ADDITIVE
 SET CLASSLIB TO "MagicMenu" ADDITIVE
 
