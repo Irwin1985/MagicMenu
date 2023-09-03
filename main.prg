@@ -12,6 +12,10 @@ IF NOT PEMSTATUS(_screen, 'oBridge', 5)
 	_screen.AddProperty('oBridge', .null.)
 ENDIF
 
+IF NOT PEMSTATUS(_screen, 'oVfpStretch', 5)
+	_screen.AddProperty('oVfpStretch', .null.)
+ENDIF
+
 IF PCOUNT() == 0
 	tcLanguage = "EN"
 ENDIF
@@ -29,18 +33,23 @@ gcVersion = "0.0.1"
 glDebugMode = .t.
 IF glDebugMode
 	CD f:\desarrollo\github\magicmenu\
+	SET DEFAULT TO f:\desarrollo\github\magicmenu\
 ENDIF
 ** DEBUG
 
 SET PATH TO "classes;bmps;lang;libs" ADDITIVE
+SET PROCEDURE TO "VFPStretch" ADDITIVE
 SET CLASSLIB TO "MagicMenu" ADDITIVE
 
 _screen.oHelper = CREATEOBJECT("Helper")
 _screen.oLang = _screen.oHelper.oLanguage.loadLanguage(LOWER(tcLanguage))
+_screen.oVFPStretch = CREATEOBJECT("vfpStretch")
 
 IF !FILE(gcMainDir + 'libs\IISManager.dll')
 	_screen.oHelper.oSystem.ExtractDependencies()
 ENDIF
+
+
 
 * Load the wwDotNetBridge
 DO wwDotNetBridge
