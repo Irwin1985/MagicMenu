@@ -16,6 +16,10 @@ IF NOT PEMSTATUS(_screen, 'oVfpStretch', 5)
 	_screen.AddProperty('oVfpStretch', .null.)
 ENDIF
 
+IF NOT PEMSTATUS(_screen, 'oProjectManager', 5)
+	_screen.AddProperty('oProjectManager', .null.)
+ENDIF
+
 IF PCOUNT() == 0
 	tcLanguage = "EN"
 ENDIF
@@ -45,11 +49,9 @@ _screen.oHelper = CREATEOBJECT("Helper")
 _screen.oLang = _screen.oHelper.oLanguage.loadLanguage(LOWER(tcLanguage))
 _screen.oVFPStretch = CREATEOBJECT("vfpStretch")
 
-IF !FILE(gcMainDir + 'libs\IISManager.dll')
+IF !DIRECTORY(gcMainDir + 'libs\')
 	_screen.oHelper.oSystem.ExtractDependencies()
 ENDIF
-
-
 
 * Load the wwDotNetBridge
 DO wwDotNetBridge
