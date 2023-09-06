@@ -1,4 +1,4 @@
-LPARAMETERS tcLanguage
+LPARAMETERS tcLanguage, tnToolBarSize
 
 IF NOT PEMSTATUS(_screen, 'oLang', 5)
 	_screen.AddProperty('oLang', .null.)
@@ -20,16 +20,19 @@ IF NOT PEMSTATUS(_screen, 'oProjectManager', 5)
 	_screen.AddProperty('oProjectManager', .null.)
 ENDIF
 
-IF PCOUNT() == 0
+IF EMPTY(tcLanguage)
 	tcLanguage = "EN"
+ENDIF
+
+IF EMPTY(tnToolBarSize)
+	tnToolBarSize = 32
 ENDIF
 
 IF NOT INLIST(UPPER(tcLanguage), "ES", "EN")
 	MESSAGEBOX("Wrong value for parameter: tcLanguage." + CHR(13) + CHR(10) + "Please send 'ES' for Spanish or 'EN' for English.", 16, "Error")
 	RETURN
 ENDIF
-
-public loBarra, gcMainDir, gcVersion, glDebugMode
+public loBarra, gcMainDir, gcVersion, glDebugMode, lcMenuClass
 gcMainDir = ADDBS(SYS(5) + SYS(2003))
 gcVersion = "0.0.1"
 
@@ -57,6 +60,6 @@ ENDIF
 DO wwDotNetBridge
 InitializeDotnetVersion()
 _screen.oBridge = getwwDotNetBridge()
-
-loBarra = CREATEOBJECT("ToolBarMenu")
+lcMenuClass = "ToolBarMenuX" + ALLTRIM(STR(tnToolBarSize))
+loBarra = CREATEOBJECT(lcMenuClass)
 loBarra.show()
