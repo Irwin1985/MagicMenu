@@ -20,8 +20,20 @@ IF NOT PEMSTATUS(_screen, 'oProjectManager', 5)
 	_screen.AddProperty('oProjectManager', .null.)
 ENDIF
 
+IF NOT PEMSTATUS(_screen, 'oActiveProject', 5)
+	_screen.AddProperty('oActiveProject', .null.)
+ENDIF
+
+IF NOT PEMSTATUS(_screen, 'oMagicMenu', 5)
+	_screen.AddProperty('oMagicMenu', CREATEOBJECT("Empty"))
+	ADDPROPERTY(_screen.oMagicMenu, "cMainDir", ADDBS(JUSTPATH(SYS(16))))
+	ADDPROPERTY(_screen.oMagicMenu, "cDirBMP", ADDBS(JUSTPATH(SYS(16))) + 'bmps\')
+	ADDPROPERTY(_screen.oMagicMenu, "cVersion", "0.0.1")
+	ADDPROPERTY(_screen.oMagicMenu, "bDebugMode", .F.)
+ENDIF
+
 IF EMPTY(tcLanguage)
-	tcLanguage = "EN"
+	tcLanguage = "ES"
 ENDIF
 
 IF EMPTY(tnToolBarSize)
@@ -32,27 +44,28 @@ IF NOT INLIST(UPPER(tcLanguage), "ES", "EN")
 	MESSAGEBOX("Wrong value for parameter: tcLanguage." + CHR(13) + CHR(10) + "Please send 'ES' for Spanish or 'EN' for English.", 16, "Error")
 	RETURN
 ENDIF
-public loBarra, gcMainDir, gcVersion, glDebugMode, lcMenuClass
-gcMainDir = ADDBS(SYS(5) + SYS(2003))
-gcVersion = "0.0.1"
 
+public loBarra
 ** DEBUG
-glDebugMode = .t.
-IF glDebugMode
-	CD f:\desarrollo\github\magicmenu\
-	SET DEFAULT TO f:\desarrollo\github\magicmenu\
-ENDIF
+*!*	_screen.oMagicMenu.bDebugMode = .t.
+*!*	IF _screen.oMagicMenu.bDebugMode
+*!*		CD f:\desarrollo\github\magicmenu\
+*!*		SET DEFAULT TO f:\desarrollo\github\magicmenu\
+*!*	ENDIF
 ** DEBUG
+
+CD (_screen.oMagicMenu.cMainDir)
+SET DEFAULT TO (_screen.oMagicMenu.cMainDir)
 
 SET PATH TO "classes;bmps;lang;libs" ADDITIVE
 SET PROCEDURE TO "VFPStretch" ADDITIVE
 SET CLASSLIB TO "MagicMenu" ADDITIVE
 
-_screen.oHelper = CREATEOBJECT("Helper")
-_screen.oLang = _screen.oHelper.oLanguage.loadLanguage(LOWER(tcLanguage))
+_screen.oHelper 	= CREATEOBJECT("Helper")
+_screen.oLang 		= _screen.oHelper.oLanguage.loadLanguage(LOWER(tcLanguage))
 _screen.oVFPStretch = CREATEOBJECT("vfpStretch")
 
-IF !DIRECTORY(gcMainDir + 'libs\')
+IF !DIRECTORY(_screen.oMagicMenu.cMainDir + 'libs\')
 	_screen.oHelper.oSystem.ExtractDependencies()
 ENDIF
 
@@ -60,6 +73,7 @@ ENDIF
 DO wwDotNetBridge
 InitializeDotnetVersion()
 _screen.oBridge = getwwDotNetBridge()
+LOCAL lcMenuClass
 lcMenuClass = "ToolBarMenuX" + ALLTRIM(STR(tnToolBarSize))
 loBarra = CREATEOBJECT(lcMenuClass)
 loBarra.show()
