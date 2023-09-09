@@ -30,6 +30,11 @@ IF NOT PEMSTATUS(_screen, 'oMagicMenu', 5)
 	ADDPROPERTY(_screen.oMagicMenu, "cDirBMP", ADDBS(JUSTPATH(SYS(16))) + 'bmps\')
 	ADDPROPERTY(_screen.oMagicMenu, "cVersion", "0.0.1")
 	ADDPROPERTY(_screen.oMagicMenu, "bDebugMode", .F.)
+	ADDPROPERTY(_screen.oMagicMenu, "cVFPDir", "C:\Program Files (x86)\Microsoft Visual FoxPro 9\vfp9.exe")	
+	ADDPROPERTY(_screen.oMagicMenu, "cTempDir", ADDBS(GETENV("USERPROFILE")) + 'MagicMenu\')
+	IF NOT DIRECTORY(_screen.oMagicMenu.cTempDir)
+		MKDIR (_screen.oMagicMenu.cTempDir)
+	ENDIF
 ENDIF
 
 IF EMPTY(tcLanguage)
