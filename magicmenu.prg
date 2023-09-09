@@ -26,6 +26,7 @@ ENDIF
 
 IF NOT PEMSTATUS(_screen, 'oMagicMenu', 5)
 	_screen.AddProperty('oMagicMenu', CREATEOBJECT("Empty"))
+	ADDPROPERTY(_screen.oMagicMenu, "oBarra", .null.)
 	ADDPROPERTY(_screen.oMagicMenu, "cMainDir", ADDBS(JUSTPATH(SYS(16))))
 	ADDPROPERTY(_screen.oMagicMenu, "cDirBMP", ADDBS(JUSTPATH(SYS(16))) + 'bmps\')
 	ADDPROPERTY(_screen.oMagicMenu, "cVersion", "0.0.1")
@@ -42,22 +43,13 @@ IF EMPTY(tcLanguage)
 ENDIF
 
 IF EMPTY(tnToolBarSize)
-	tnToolBarSize = 32
+	tnToolBarSize = 16
 ENDIF
 
 IF NOT INLIST(UPPER(tcLanguage), "ES", "EN")
 	MESSAGEBOX("Wrong value for parameter: tcLanguage." + CHR(13) + CHR(10) + "Please send 'ES' for Spanish or 'EN' for English.", 16, "Error")
 	RETURN
 ENDIF
-
-public loBarra
-** DEBUG
-*!*	_screen.oMagicMenu.bDebugMode = .t.
-*!*	IF _screen.oMagicMenu.bDebugMode
-*!*		CD f:\desarrollo\github\magicmenu\
-*!*		SET DEFAULT TO f:\desarrollo\github\magicmenu\
-*!*	ENDIF
-** DEBUG
 
 CD (_screen.oMagicMenu.cMainDir)
 SET DEFAULT TO (_screen.oMagicMenu.cMainDir)
@@ -80,5 +72,5 @@ InitializeDotnetVersion()
 _screen.oBridge = getwwDotNetBridge()
 LOCAL lcMenuClass
 lcMenuClass = "ToolBarMenuX" + ALLTRIM(STR(tnToolBarSize))
-loBarra = CREATEOBJECT(lcMenuClass)
-loBarra.show()
+_screen.oMagicMenu.oBarra = CREATEOBJECT(lcMenuClass)
+_screen.oMagicMenu.oBarra.show()
